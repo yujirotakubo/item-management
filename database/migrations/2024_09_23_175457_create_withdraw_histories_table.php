@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('withdraw_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // ログインユーザーを識別
+            //$table->unsignedBigInteger('user_id'); // ログインユーザーを識別
             $table->foreignId('item_id')->constrained()->onDelete('cascade'); // itemsテーブルとのリレーション
             $table->integer('quantity'); // 払出し個数
             $table->timestamps(); // 払出し日時
