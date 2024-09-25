@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned(); //ユーザーID
             $table->string('name'); // 商品名
             $table->string('type'); // カテゴリー
             $table->string('date')->nullable(); // 期限
