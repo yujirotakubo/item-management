@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('type'); // カテゴリー
             $table->string('date')->nullable(); // 期限
             $table->integer('individual'); // 個数
-            $table->string('location'); // 保管場所（追加）
+            //$table->string('location'); // 保管場所（追加）
             $table->string('detail')->nullable(); // 備考
             $table->timestamps();
         });
