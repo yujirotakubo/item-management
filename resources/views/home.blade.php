@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', '備蓄品管理システム')
+@section('title', 'StockMaster Nexus')
 
 @section('head')
     <link rel="icon" type="image/x-icon" href="{{ asset('img/AdminLTELogo.png') }}">
 @stop
 
 @section('content_header')
-    <h1 class="text-center font-weight-bold" style="color: #2c3e50;">ようこそ、備蓄品管理システムへ</h1>
+    <h1 class="text-center font-weight-bold" style="color: #2c3e50;">Welcome to StockMaster Nexus</h1>
 @stop
 
 @section('content')
-    <p class="lead" style="font-size: 1.2rem; color: #34495e;">本システムでは、災害に備えて必要な備蓄品を管理し、迅速な対応を可能にします。</p>
+    <p class="lead" style="font-size: 1.2rem; color: #34495e;">本システムでは、災害に備えて必要な備蓄品を管理し迅速な対応を可能にします。</p>
 
     <!-- 備蓄品の総アイテム数と合計個数の表示 -->
     <div class="row mb-5">

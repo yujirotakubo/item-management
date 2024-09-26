@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => '備蓄品管理',
+    'title' => 'StockMaster Nexus',
     'title_prefix' => '',
     'title_postfix' => '',
 
