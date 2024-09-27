@@ -29,7 +29,6 @@ class HomeController extends Controller
         $totalIndividualCount = Item::sum('individual');
 
         // 期限が1ヶ月以内の商品を取得
-        dd(Item::all());
         $nearExpiryItems = Item::where('date', '<=', now()->addMonth())->get();
 
         // 変数をビューに渡す
@@ -50,6 +49,7 @@ class HomeController extends Controller
         $totalIndividualCount = $totalQuantity->sum('total_individual');
 
         // 期限が1ヶ月以内の商品を取得
+        dd(now()->addMonth());
         $nearExpiryItems = Item::where('date', '<=', now()->addMonth())->get();
 
         // これをダッシュボードビューに渡す
