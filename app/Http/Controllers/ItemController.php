@@ -45,6 +45,8 @@ class ItemController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'name' => 'required|max:100',
+                'individual' => 'required|integer',
+
             ]);
 
             Item::create([

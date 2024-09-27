@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <label for="individual">個数</label>
-                            <input type="text" class="form-control" id="individual" name="individual" placeholder="個数を入力">
+                            <input type="number" class="form-control" id="individual" name="individual" placeholder="個数を入力">
                         </div>
 
                         <div class="form-group">
