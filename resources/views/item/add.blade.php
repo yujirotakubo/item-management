@@ -43,7 +43,7 @@
 
                         <div class="form-group" id="expiryField" style="display: none;">
                             <label for="date">期限</label>
-                            <input type="text" class="form-control" id="date" name="date" placeholder="yyyy/mm/dd">
+                            <input type="text" class="form-control" id="date" name="date" placeholder="yyyy-mm-dd">
                         </div>
 
                         <div class="form-group">
