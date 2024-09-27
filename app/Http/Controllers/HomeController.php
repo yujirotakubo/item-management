@@ -50,7 +50,7 @@ class HomeController extends Controller
 
         // 期限が1ヶ月以内の商品を取得
         //dd(now()->addMonth());
-        $nearExpiryItems = Item::where('date', '<=', now()->addMonth())->get();
+        $nearExpiryItems = Item::where('date', '<=', '2024-10-27'/*()->addMonth()*/)->get();
 
         // これをダッシュボードビューに渡す
         return view('home', compact('totalItems', 'totalIndividualCount', 'nearExpiryItems'));
