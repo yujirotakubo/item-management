@@ -42,7 +42,6 @@
         ご希望者にお譲りします
     </div>
     <div class="row">
-        @dump($nearExpiryItems)
         @foreach ($nearExpiryItems as $item) <!-- 修正: 変数名を単数形に変更 -->
             <div class="col-md-4 mb-3">
                 <div class="card" style="background-color: #f8f9fa; border: 1px solid #ced4da;">

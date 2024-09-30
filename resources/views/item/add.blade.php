@@ -76,6 +76,17 @@
 
 @section('js')
 <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const dateField = document.getElementById('date');
+        const dateValue = dateField.value;
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/; // yyyy-mm-dd形式の正規表現
+
+        if (dateValue && !datePattern.test(dateValue)) {
+            event.preventDefault();
+            alert('期限はyyyy-mm-dd形式で入力してください。');
+        }
+    });
+
     function toggleExpiryField() {
         const typeSelect = document.getElementById('type');
         const expiryField = document.getElementById('expiryField');
