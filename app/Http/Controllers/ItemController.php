@@ -39,14 +39,17 @@ class ItemController extends Controller
 
         return view('item.index', compact('items'));
     }
-    
+
+    /**
+     * 商品登録
+     */
     public function add(Request $request)
     {
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'name' => 'required|max:100',
                 'individual' => 'required|integer',
-
+                'date' => 'nullable|date_format:Y-m-d', // yyyy-mm-dd形式のバリデーション
             ]);
 
             Item::create([
@@ -71,9 +74,12 @@ class ItemController extends Controller
     public function edit(Request $request, $id)
     {
         $item = Item::find($id);
-        return view('item.edit' ,compact('item'));
+        return view('item.edit', compact('item'));
     }
 
+    /**
+     * 商品更新
+     */
     public function update(Request $request, $id)
     {
         $rules = [
@@ -84,10 +90,11 @@ class ItemController extends Controller
             'detail' => 'nullable|string',
         ];
 
+        // 食品（保存食）または食品（飲料）の場合、期限が必須でyyyy-mm-dd形式であることをバリデート
         if ($request->input('type') === '食品（保存食）' || $request->input('type') === '食品（飲料）') {
-            $rules['date'] = 'required|date';
+            $rules['date'] = 'required|date_format:Y-m-d'; // 必須かつフォーマットチェック
         } else {
-            $rules['date'] = 'nullable|date';
+            $rules['date'] = 'nullable|date_format:Y-m-d'; // 空の場合も許可
         }
 
         $validatedData = $request->validate($rules);
@@ -97,6 +104,9 @@ class ItemController extends Controller
         return redirect('/items')->with('success', '商品を編集しました');
     }
 
+    /**
+     * 商品払出し
+     */
     public function withdraw(Request $request, $id)
     {
         $request->validate(['withdraw_quantity' => 'required|integer|min:1']);
@@ -116,9 +126,12 @@ class ItemController extends Controller
             'quantity' => $withdrawQuantity,
         ]);
 
-        return redirect('/items')->with('success', '商品を払出ししました');        
+        return redirect('/items')->with('success', '商品を払出ししました');
     }
 
+    /**
+     * 商品削除
+     */
     public function delete(Request $request, $id)
     {
         $item = Item::findOrFail($id);
@@ -127,6 +140,9 @@ class ItemController extends Controller
         return redirect('/items')->with('success', '商品を削除しました');
     }
 
+    /**
+     * 商品一覧をCSVでエクスポート
+     */
     public function exportCsv()
     {
         $items = Item::all();
@@ -156,6 +172,9 @@ class ItemController extends Controller
         }, 200, $headers);
     }
 
+    /**
+     * 払出し履歴をCSVでエクスポート
+     */
     public function exportHistory()
     {
         $histories = WithdrawHistory::with('item')->get();
