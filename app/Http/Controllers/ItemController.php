@@ -48,9 +48,18 @@ class ItemController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'name' => 'required|max:100',
-                'individual' => 'required|integer',
+                'type' => 'required|string|max:255', // typeに必須バリデーションを追加
+                'individual' => 'required|integer|min:1', // individualが1以上であることをバリデート
                 'date' => 'nullable|date_format:Y-m-d', // yyyy-mm-dd形式のバリデーション
+                'location' => 'required|string|max:255', // locationに必須バリデーションを追加
             ]);
+
+            // 追加のバリデーション: 食品（保存食）または食品（飲料）の場合、期限が必須でyyyy-mm-dd形式であることを確認
+            if ($request->type === '食品（保存食）' || $request->type === '食品（飲料）') {
+                $request->validate([
+                    'date' => 'required|date_format:Y-m-d', // 必須かつフォーマットチェック
+                ]);
+            }
 
             Item::create([
                 'user_id' => Auth::user()->id,
@@ -82,11 +91,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // ルールを初期化
         $rules = [
             'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'individual' => 'required|integer',
-            'location' => 'required|string|max:255',
+            'type' => 'required|string|max:255', // typeに必須バリデーションを追加
+            'individual' => 'required|integer|min:1', // individualが1以上であることをバリデート
+            'location' => 'required|string|max:255', // locationに必須バリデーションを追加
             'detail' => 'nullable|string',
         ];
 
@@ -97,6 +107,7 @@ class ItemController extends Controller
             $rules['date'] = 'nullable|date_format:Y-m-d'; // 空の場合も許可
         }
 
+        // バリデーションの実行
         $validatedData = $request->validate($rules);
         $item = Item::findOrFail($id);
         $item->update($validatedData);
@@ -202,3 +213,4 @@ class ItemController extends Controller
         }, 200, $headers);
     }
 }
+
